@@ -200,6 +200,7 @@ func (c *Client) exchange(m *Msg, a string) (r *Msg, rtt time.Duration, err erro
 	r, err = co.ReadMsg()
 	if err == nil && r.Id != m.Id {
 		err = ErrId
+		log.Printf("ErrId: encountered: m.Id: %v, r.Id: %v\nr: %v\n", m.Id, r.Id, r)
 	}
 	rtt = time.Since(t)
 	return r, rtt, err
@@ -428,6 +429,7 @@ func ExchangeConn(c net.Conn, m *Msg) (r *Msg, err error) {
 	r, err = co.ReadMsg()
 	if err == nil && r.Id != m.Id {
 		err = ErrId
+		log.Printf("ErrId: encountered: m.Id: %v, r.Id: %v\nr: %v\n", m.Id, r.Id, r)
 	}
 	return r, err
 }
